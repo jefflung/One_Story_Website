@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>一个故事工作室</title>
+    <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+            background-color: #FFF;
+
+        }
+        #nav-bar{
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+
+        }
+        #title{
+            position: absolute;
+            color:#FFF;
+            top:50%;
+            left:50%;
+            font-size: 40px;
+        }
+        .title-transition{
+            animation:mytitlemove 2s 1;
+            animation-fill-mode:forwards;
+        }
+        @keyframes mytitlemove {
+            to{
+                margin: 5px;
+                height: 30px;
+                top:0;
+                left:0;
+                color:#FFF;
+                font-size: 20px;
+            }
+        }
+        .nav-transition{
+            animation:mynavmove 2s 1;
+            animation-fill-mode:forwards;
+        }
+
+        @keyframes mynavmove {
+            to{
+                height: 40px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="nav-bar">
+    <div id="title"></div>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    function Input(){
+        this.str = "";
+        this.count = 0;
+        this.query = null;
+        this.timer = 0;
+        this.interval = 0;
+    }
+    Input.prototype.init = function (str,timer,query) {
+        this.str = str;
+        this.timer = timer;
+        this.makeTimer();
+        this.query = query;
+    };
+    Input.prototype.makeTimer = function () {
+        var This = this;
+        var cnt = 0;
+        this.interval = setInterval(function () {
+            console.log($("#title"));
+            if(This.query[cnt] == -1){
+                $("span").last().remove();
+            }
+
+            if(This.count  == This.query[cnt]){
+                $("#title").append("<span>"+This.str.charAt(cnt)+"</span>");
+                cnt++;
+            }
+            This.count++;
+            if(This.count % 2 == 0) {
+                $("#title").append("<span id='cursor'>l</span>");
+            }
+            else if(This.count % 2 == 1){
+                $("#cursor").remove();
+            }
+            if(cnt >= This.str.length){
+                setTimeout(function () {
+                    clearInterval(This.interval);
+                    $("#cursor").remove();
+                    $("#title").addClass("title-transition");
+                    $("#nav-bar").addClass("nav-transition");
+                },1000);
+            }
+        },This.timer);
+    };
+    var input = new Input();
+    var query = new Array(3,4,5,7,8,9,10,11,12,13,14,15,17,18,20,21,24,26);
+    for(var i = 0; i<=query.length-1 ;i++) {
+        query[i] *= 1;
+    }
+    input.init("One Story Studio",100,query);
+
+
+</script>
+
+</body>
+</html>
