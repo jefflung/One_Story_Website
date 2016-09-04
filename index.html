@@ -4,62 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>一个故事工作室</title>
-    <link href="bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        html,body{
-            height: 100%;
-            width: 100%;
-            background-color: #FFF;
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="./dist/css/index.css" rel="stylesheet">
 
-        }
-        #nav-bar{
-            height: 100%;
-            width: 100%;
-            background-color: #000;
-
-        }
-        #title{
-            position: absolute;
-            color:#FFF;
-            top:50%;
-            left:50%;
-            font-size: 40px;
-        }
-        .title-transition{
-            animation:mytitlemove 2s 1;
-            animation-fill-mode:forwards;
-        }
-        @keyframes mytitlemove {
-            to{
-                margin: 5px;
-                height: 30px;
-                top:0;
-                left:0;
-                color:#FFF;
-                font-size: 20px;
-            }
-        }
-        .nav-transition{
-            animation:mynavmove 2s 1;
-            animation-fill-mode:forwards;
-        }
-
-        @keyframes mynavmove {
-            to{
-                height: 40px;
-            }
-        }
-
-
-    </style>
 </head>
 <body>
 
 <div id="nav-bar">
-    <div id="title"></div>
+    <div id="title" class="col-md-4  col-md-offset-2"></div>
+</div>
+    <div class="row" id="works">
+      <div class="col-md-2 col-md-offset-2 container">
+
+          <div class="content">
+              川普
+          </div>
+      </div>
+
+
+
+      <div class="col-md-2 container">
+           <div class="content">
+              小马
+          </div>
+      </div>
+      <div class="col-md-2 container">          
+          <div class="content">
+              迷宫游戏   
+
+          </div>
+    </div>
+      <div class="col-md-2 container">
+          <div class="content">
+              电子时代
+
+          </div>
+      </div>
 </div>
 
 
+
+<footer>
+    辽ICP备16005799号
+</footer>
 <script src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
 <script>
     function Input(){
@@ -68,12 +55,14 @@
         this.query = null;
         this.timer = 0;
         this.interval = 0;
+        this.callback = null;
     }
-    Input.prototype.init = function (str,timer,query) {
+    Input.prototype.init = function (str,timer,query,callback) {
         this.str = str;
         this.timer = timer;
         this.makeTimer();
         this.query = query;
+        this.callback = callback;
     };
     Input.prototype.makeTimer = function () {
         var This = this;
@@ -99,8 +88,7 @@
                 setTimeout(function () {
                     clearInterval(This.interval);
                     $("#cursor").remove();
-                    $("#title").addClass("title-transition");
-                    $("#nav-bar").addClass("nav-transition");
+                    This.callback();
                 },1000);
             }
         },This.timer);
@@ -110,10 +98,12 @@
     for(var i = 0; i<=query.length-1 ;i++) {
         query[i] *= 1;
     }
-    input.init("One Story Studio",100,query);
 
+    input.init("One Story Studio",100,query,function(){
+    $("#title").addClass("title-transition");
+    $("#nav-bar").addClass("nav-transition");
+    });
 
 </script>
-
 </body>
 </html>
