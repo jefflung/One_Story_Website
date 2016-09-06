@@ -1,6 +1,6 @@
 * {
-  margin: 0px;
-  padding: 0px; }
+  margin: 0;
+  padding: 0; }
 
 html, body {
   height: 100%;
@@ -17,9 +17,10 @@ html, body {
 #title {
   position: absolute;
   color: #FFF;
-  top: 50%;
-  left: 50%;
-  font-size: 40px; }
+  left: 39%;
+  width: 25%;
+  top: 40%;
+  font-size: 2rem; }
 
 .title-transition {
   animation: mytitlemove 2s 1;
@@ -28,15 +29,7 @@ html, body {
   -webkit-animation-fill: mytitlemove 2s 1; }
 
 @keyframes mytitlemove {
-  to {
-    margin-top: 7px;
-    margin-bottom: 5px;
-    padding: 0;
-    height: 30px;
-    top: 0;
-    left: 0;
-    color: #FFF;
-    font-size: 20px; } }
+  100% { } }
 
 .nav-transition {
   animation: mynavmove 2s 1;
@@ -45,23 +38,37 @@ html, body {
   animation-fill-mode: forwards; }
 
 @keyframes mynavmove {
-  to {
-    height: 40px; } }
+  100% {
+    height: 15rem; } }
 
 footer {
   position: fixed;
   bottom: 0;
-  height: 50px;
+  height: 2.5rem;
   width: 100%;
   background-color: #DDDDDD;
   text-align: center;
-  line-height: 50px; }
+  line-height: 2.5rem; }
 
 #works {
-  margin-right: 0;
-  margin-top: 30px; }
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  width: 80%; }
   #works div {
     text-align: center; }
     #works div .content {
-      border: 1px #000 solid;
-      padding: 20px; }
+      position: relative;
+      border: 1px #CCC solid;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      opacity: 0;
+      height: auto; }
+
+.content-animation {
+  animation: mycontentmove 1s 1;
+  animation-fill-mode: forwards; }
+
+@keyframes mycontentmove {
+  to {
+    opacity: 1; } }
